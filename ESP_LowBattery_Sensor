@@ -144,6 +144,6 @@ void loop() {
     Serial.print(event.relative_humidity);
     Serial.println(F("%"));
     sendCMD(event);
-    ESP.deepSleep(10e6);//deep sleep 10s
   }
+  ESP.deepSleep(10e6);//deep sleep 10s
 }
