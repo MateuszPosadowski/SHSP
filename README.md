@@ -1,7 +1,7 @@
 # SHSP
 Smart Home System Project 
 
-The project includes 3 devices: a relay driver, a thermometer and a humidity meter.
+The project includes 3 devices: a relay driver, a thermometer and a Low Power temperature and humidity sensor
 
 ## Relay Driver
 
@@ -37,6 +37,7 @@ Here you can turn on or off the relay yourself.
 
 ## Thermometer
 
+The driver code is in the ESP_Temperature.ino file. 
 A temperature measuring device that allows you to send a request under certain conditions
 
 ### Connection to the network
@@ -62,4 +63,20 @@ Here it is possible to set the condition and the request
 Enter a condition whether the temperature value is to be lower (<), greater (>) or equal (=) to the set value. For example, "<25" will mean that the request will be sent when the read temperature exceeds 25 degrees.
 
 Then enter the ip address and command. For example 192.168.1.44 /on
+
+### External Sensor
+
+Here you can see the measurements from the external sensor
+
+## Low Power temperature and humidity sensor
+
+The driver code is in the ESP_LowBattery_Sensor.ino file. 
+The device uses the DHT11 sensor. The device connects to the temperature sensor network, sends measurements and then falls into a deep sleep for 10 seconds.
+After this time, the device is reset and the whole process starts again. During sleep, the device consumes about 20 uA 
+
+
+
+
+
+
 
