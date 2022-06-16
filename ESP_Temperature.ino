@@ -33,6 +33,9 @@ float  temperatur_value;
 String  api;
 String  device_ip_address;
 
+float temperatur_value_DHT11;
+float humidity_value_DHT11;
+
 int httpResponseCode;
 
 bool condition_set = false;
@@ -121,6 +124,8 @@ void setup() {
 
 
   server.on("/", handleRoot);
+  server.on("/external", handleExternal);
+  server.on("/setexternal",handleSetExternal);
   server.on("/set", setParams);
   server.on("/setting", handleSETTING);
   server.on("/test.svg", drawGraph);
@@ -310,6 +315,76 @@ void conditionError()
 digitalWrite(PIN_LED, 0);
 delay(1);
 server.send(200, "text/html", temp);
+}
+
+void handleSetExternal()
+{
+  temperatur_value_DHT11=server.arg("temperatur_value").toFloat();
+  humidity_value_DHT11 = server.arg("humidity_value").toFloat();
+  handleExternal();
+}
+
+
+void handleExternal()
+{
+  char temp[2048];
+  if(temperatur_value_DHT11 == 0 || humidity_value_DHT11 == 0)
+  {
+    snprintf(temp, 2048,
+
+           "<html>\
+  <head>\
+    <meta charset='UTF-8' http-equiv='refresh' content='20'/>\
+    <title>ESP8266 Demo</title>\
+    <style>\
+      body { background-color: #cccccc; font-family: Arial, Helvetica, Sans-Serif; Color: #000088; }\
+    </style>\
+  </head>\
+  <body>\
+    <h1>Brak odczytu z czujnika bateryjnego</h1>\
+    </br></br>\
+    </form>\
+    <form action='/' method='get'>\
+    <input type='submit' value='Home' href=/ />\
+    </form>\
+    </br></br>\
+  </body>\
+</html>"
+
+          );
+  delay(1);
+  server.send(200, "text/html", temp);
+  }
+  else
+  {
+    snprintf(temp, 2048,
+
+           "<html>\
+  <head>\
+    <meta charset='UTF-8' http-equiv='refresh' content='20'/>\
+    <title>ESP8266 Demo</title>\
+    <style>\
+      body { background-color: #cccccc; font-family: Arial, Helvetica, Sans-Serif; Color: #000088; }\
+    </style>\
+  </head>\
+  <body>\
+    <h1>Wartości odczytane z czujnika bateryjnego</h1>\
+    </br></br>\
+    <p> Temperatura: %.2f &deg C</p>\
+    <p> Wilgotność: %.2f %% </p>\
+    </br></br>\
+    </form>\
+    <form action='/' method='get'>\
+    <input type='submit' value='Home' href=/ />\
+    </form>\
+    </br></br>\
+  </body>\
+</html>", temperatur_value_DHT11, humidity_value_DHT11
+
+          );
+  delay(1);
+  server.send(200, "text/html", temp);
+  }
 }
 
 void setParams()
@@ -527,6 +602,10 @@ void handleRoot() {
     <input type='submit' value='Ustawienia' href=/setting />\
     </form>\
     </br></br>\
+    <form action='/external' method='get'>\
+    <p>Sprawdź temperature i wilgotnosc z czujnika bateryjnego</p> \
+    <input type='submit' value='Czujnik Bateryjny' href=/external />\
+    </form>\
     </br></br>\
   </body>\
 </html>",
