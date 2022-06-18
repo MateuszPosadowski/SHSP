@@ -13,6 +13,7 @@
 #include <EEPROM.h>
 #include <NTPClient.h>
 #include <OneWire.h>
+#include <Arduino_JSON.h>
 
 #define DEBUG_ON
 #define PIN_LED BUILTIN_LED
@@ -128,6 +129,7 @@ void setup() {
   server.on("/setexternal",handleSetExternal);
   server.on("/set", setParams);
   server.on("/setting", handleSETTING);
+  server.on("/api/state",handleState);
   server.on("/test.svg", drawGraph);
   server.on("/inline", []() {
     server.send(200, "text/plain", "this works as well");
@@ -694,6 +696,13 @@ if(WiFi.status()== WL_CONNECTED){
     }
 
 }
+
+void handleState()
+{
+  delay(1);
+  server.send(200, "application/json", "{\"temperatur_value\": \""+String(temperatur_value)+"\",\"condition\":\""+String(condition) + "\",\"api\":\""+String(api)+"\",\"device_ip_address\":\""+ String(device_ip_address)+"\",\"temperatur_value_DHT11\":\""+String(temperatur_value_DHT11)+"\",\"humidity_value_DHT11\":\"" + String(humidity_value_DHT11)+"\"}");
+}
+
 
 void loop() {
 
