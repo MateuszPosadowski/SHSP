@@ -44,7 +44,6 @@ uint8_t minutes_set_on_morning=0;
 uint8_t hour_set_off=23;
 uint8_t minutes_set_off=0;
 
-
 uint8_t hour_set_off_morning=6;
 uint8_t minutes_set_off_morning=30;
 
@@ -137,6 +136,7 @@ void setup() {
   server.on("/manual", handleMANUAL);
   server.on("/api/on",handleApiOn);
   server.on("/api/off",handleApiOff);
+  server.on("/api/state",handleState);
   server.on("/test.svg", drawGraph);
   server.on("/inline", []() {
     server.send(200, "text/plain", "this works as well");
@@ -608,6 +608,13 @@ void handleNotFound() {
   digitalWrite(PIN_LED, 0);
 }
 
+void handleState()
+{
+  delay(1);
+  server.send(200, "application/json", "{\"relay\": \""+stan+"\",\"first_hours_state_char\":\""+String(first_hours_state_char) + "\",\"hour_set_on\":\""+String(hour_set_on)+"\",\"minutes_set_on\":\""+ String(minutes_set_on)+"\",\"hour_set_off\":\""+String(hour_set_off)+"\",\"minutes_set_off\":\"" + String(minutes_set_off)+"\",\"second_hours_state_char\":\""+String(second_hours_state_char)+"\",\"hour_set_on_morning\":\""+String(hour_set_on_morning)+"\",\"minutes_set_on_morning\":\""+String(minutes_set_on_morning)+"\",\"hour_set_off_morning\":\""+String(hour_set_off_morning)+"\",\"minutes_set_off_morning\":\""+String(minutes_set_off_morning)+"\"}");
+}
+
+
 void handleApiOn()
 {
   delay(1);
@@ -616,6 +623,7 @@ void handleApiOn()
   realy = RELAY_ON;
   server.send(200, "application/json", "{\"relay\": \"ON\"}");
 }
+
 
 void handleApiOff()
 {
