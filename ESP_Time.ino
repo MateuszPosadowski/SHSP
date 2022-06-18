@@ -11,6 +11,7 @@
 #include <WiFiUdp.h>
 #include <EEPROM.h>
 #include <NTPClient.h>
+#include <Arduino_JSON.h>
 
 #define DEBUG_ON
 #define PIN_LED BUILTIN_LED
@@ -134,6 +135,8 @@ void setup() {
   server.on("/set", setParams);
   server.on("/setting", handleSETTING);
   server.on("/manual", handleMANUAL);
+  server.on("/api/on",handleApiOn);
+  server.on("/api/off",handleApiOff);
   server.on("/test.svg", drawGraph);
   server.on("/inline", []() {
     server.send(200, "text/plain", "this works as well");
@@ -603,6 +606,24 @@ void handleNotFound() {
   delay(1);
   server.send(404, "text/plain", message);
   digitalWrite(PIN_LED, 0);
+}
+
+void handleApiOn()
+{
+  delay(1);
+  digitalWrite(RELAY,HIGH);
+  stan = "ON";
+  realy = RELAY_ON;
+  server.send(200, "application/json", "{\"relay\": \"ON\"}");
+}
+
+void handleApiOff()
+{
+  delay(1);
+  digitalWrite(RELAY,LOW);
+  stan = "OFF";
+  realy = RELAY_OFF;
+  server.send(200, "application/json", "{\"relay\": \"OFF\"}");
 }
 
 void handleON()
