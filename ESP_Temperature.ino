@@ -700,7 +700,7 @@ if(WiFi.status()== WL_CONNECTED){
 void handleState()
 {
   delay(1);
-  server.send(200, "application/json", "{\"temperatur_value\": \""+String(temperatur_value)+"\",\"condition\":\""+String(condition) + "\",\"api\":\""+String(api)+"\",\"device_ip_address\":\""+ String(device_ip_address)+"\",\"temperatur_value_DHT11\":\""+String(temperatur_value_DHT11)+"\",\"humidity_value_DHT11\":\"" + String(humidity_value_DHT11)+"\"}");
+  server.send(200, "application/json", "{\"temperatur_value\": \""+String(temperatur_value)+"\",\"condition\":\""+String(condition) + "\",\"api\":\""+String(api)+"\",\"device_ip_address\":\""+ String(device_ip_address)+"\",\"temperature_value_DS18B20\":\""+String(celsius)+"\",\"temperatur_value_DHT11\":\""+String(temperatur_value_DHT11)+"\",\"humidity_value_DHT11\":\"" + String(humidity_value_DHT11)+"\"}");
 }
 
 
