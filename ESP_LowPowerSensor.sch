@@ -431,11 +431,11 @@ LIBRARY BY SDTECH ROBOTICS
 </plain>
 <instances>
 <instance part="U$1" gate="G$1" x="86.36" y="55.88" smashed="yes"/>
-<instance part="GND1" gate="1" x="88.9" y="66.04" smashed="yes">
-<attribute name="VALUE" x="86.36" y="63.5" size="1.778" layer="96"/>
+<instance part="GND1" gate="1" x="91.44" y="66.04" smashed="yes">
+<attribute name="VALUE" x="88.9" y="63.5" size="1.778" layer="96"/>
 </instance>
-<instance part="P+1" gate="1" x="88.9" y="78.74" smashed="yes">
-<attribute name="VALUE" x="86.36" y="73.66" size="1.778" layer="96" rot="R90"/>
+<instance part="P+1" gate="1" x="91.44" y="78.74" smashed="yes">
+<attribute name="VALUE" x="88.9" y="73.66" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="U$2" gate="G$1" x="25.4" y="66.04" smashed="yes"/>
 </instances>
@@ -445,17 +445,17 @@ LIBRARY BY SDTECH ROBOTICS
 <net name="+5V" class="0">
 <segment>
 <pinref part="U$1" gate="G$1" pin="1"/>
-<wire x1="76.2" y1="73.66" x2="88.9" y2="73.66" width="0.1524" layer="91"/>
+<wire x1="76.2" y1="73.66" x2="91.44" y2="73.66" width="0.1524" layer="91"/>
 <pinref part="P+1" gate="1" pin="+5V"/>
-<wire x1="88.9" y1="73.66" x2="88.9" y2="76.2" width="0.1524" layer="91"/>
+<wire x1="91.44" y1="73.66" x2="91.44" y2="76.2" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="GND" class="0">
 <segment>
 <pinref part="U$1" gate="G$1" pin="2"/>
-<wire x1="76.2" y1="71.12" x2="88.9" y2="71.12" width="0.1524" layer="91"/>
+<wire x1="76.2" y1="71.12" x2="91.44" y2="71.12" width="0.1524" layer="91"/>
 <pinref part="GND1" gate="1" pin="GND"/>
-<wire x1="88.9" y1="71.12" x2="88.9" y2="68.58" width="0.1524" layer="91"/>
+<wire x1="91.44" y1="71.12" x2="91.44" y2="68.58" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$3" class="0">
@@ -488,6 +488,17 @@ LIBRARY BY SDTECH ROBOTICS
 <wire x1="35.56" y1="50.8" x2="30.48" y2="50.8" width="0.1524" layer="91"/>
 <pinref part="U$2" gate="G$1" pin="GND"/>
 <wire x1="30.48" y1="50.8" x2="30.48" y2="53.34" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$1" class="0">
+<segment>
+<pinref part="U$1" gate="G$1" pin="16"/>
+<wire x1="60.96" y1="38.1" x2="55.88" y2="38.1" width="0.1524" layer="91"/>
+<wire x1="55.88" y1="38.1" x2="55.88" y2="30.48" width="0.1524" layer="91"/>
+<wire x1="55.88" y1="30.48" x2="86.36" y2="30.48" width="0.1524" layer="91"/>
+<wire x1="86.36" y1="30.48" x2="86.36" y2="68.58" width="0.1524" layer="91"/>
+<pinref part="U$1" gate="G$1" pin="3"/>
+<wire x1="86.36" y1="68.58" x2="76.2" y2="68.58" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
